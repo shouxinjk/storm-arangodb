@@ -45,7 +45,7 @@ public class ArangoUpdateBolt extends AbstractArangoBolt {
 
         try {
         		BaseDocument doc = mapper.toDocument(tuple);
-        		logger.info("parsed doc.[doc]"+doc);
+        		logger.debug("parsed doc.[doc]"+doc);
         		arangoClient.update(collection, doc.getKey(), doc);
             this.collector.ack(tuple);
         } catch (Exception e) {

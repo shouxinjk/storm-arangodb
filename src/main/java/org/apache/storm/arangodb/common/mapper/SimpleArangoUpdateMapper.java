@@ -35,7 +35,7 @@ public class SimpleArangoUpdateMapper extends SimpleArangoMapper implements Aran
 
     @Override
     public BaseDocument toDocument(ITuple tuple) {
-    	logger.error("now update.[data]"+tuple);
+    	logger.debug("now update.[data]"+tuple);
         BaseDocument document = new BaseDocument();
         for (String field : fields) {
         		if("_key".equalsIgnoreCase(field))
