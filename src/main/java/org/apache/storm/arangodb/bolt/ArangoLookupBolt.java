@@ -29,11 +29,13 @@ import org.apache.storm.topology.OutputFieldsDeclarer;
 import org.apache.storm.tuple.Tuple;
 import org.apache.storm.tuple.Values;
 import org.apache.storm.utils.TupleUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.arangodb.entity.BaseDocument;
 
 public class ArangoLookupBolt extends AbstractArangoBolt {
-
+	private static final Logger logger = LoggerFactory.getLogger(ArangoLookupBolt.class);
     private ArangoLookupMapper mapper;
     private String query;
     private QueryFilterCreator filterCreator;
@@ -58,11 +60,14 @@ public class ArangoLookupBolt extends AbstractArangoBolt {
         		//create bindvars
         		Map<String,Object> bindVars = filterCreator.createFilter(tuple);
             //find document from arangodb
+        	logger.debug("try query.[query]"+query);
             List<BaseDocument> docs = arangoClient.query(query, bindVars, BaseDocument.class);
             //get storm values and emit
             for(BaseDocument doc:docs) {
 	            List<Values> valuesList = mapper.toTuple(tuple, doc);
+	            logger.debug("got result.[valueList]",valuesList);
 	            for (Values values : valuesList) {
+	            	logger.debug("try to emit.[values]",values);
 	                this.collector.emit(tuple, values);
 	            }
             }
