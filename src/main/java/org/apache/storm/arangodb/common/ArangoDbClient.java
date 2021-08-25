@@ -34,6 +34,7 @@ import com.arangodb.ArangoDB;
 import com.arangodb.ArangoDBException;
 import com.arangodb.ArangoDatabase;
 import com.arangodb.entity.BaseDocument;
+import com.arangodb.model.DocumentUpdateOptions;
 import com.esotericsoftware.minlog.Log;
 
 public class ArangoDbClient implements Serializable {
@@ -87,6 +88,13 @@ public class ArangoDbClient implements Serializable {
      */
     public void update(String collection, String key, BaseDocument document) {
         this.arangoClient.collection(collection).updateDocument(key, document);
+    }
+    
+    /**
+     * Update a single document with options
+     */
+    public void update(String collection, String key, BaseDocument document, DocumentUpdateOptions options) {
+        this.arangoClient.collection(collection).updateDocument(key, document, options);
     }
 
     /**
