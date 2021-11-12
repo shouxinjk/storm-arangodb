@@ -8,10 +8,13 @@
 	<properties>
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	    <java.version>1.8</java.version>
+ 		<maven.compiler.source>1.8</maven.compiler.source>
+       	<maven.compiler.target>1.8</maven.compiler.target>	    
 	    <org.slf4j.version>1.7.6</org.slf4j.version>
 	    <jackson.databind.version>2.3.2</jackson.databind.version>
 	    <junit.version>4.11</junit.version>
 	    <guava.version>16.0.1</guava.version>
+	    <storm.version>2.3.0</storm.version>
 	    <commons-lang3.version>3.3</commons-lang3.version>
 	    <cassandra.driver.core.version>2.1.7.1</cassandra.driver.core.version>
 	</properties>
@@ -28,7 +31,7 @@
 		<dependency>
 		    <groupId>org.apache.storm</groupId>
 		    <artifactId>storm-core</artifactId>
-		    <version>1.2.2</version>
+		    <version>${storm.version}</version>
 		    <scope>provided</scope>
 		</dependency>
 
